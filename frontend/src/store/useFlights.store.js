@@ -16,6 +16,8 @@ export const useFlightStore = create((set) => ({
   },
   editFlight: async (id, updatedData) => {
     try {
+      console.log(updatedData);
+
       const res = await api.put(`/flights/${id}`, updatedData);
       set((state) => ({
         flights: state.flights.map((flight) =>

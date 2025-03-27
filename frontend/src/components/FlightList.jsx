@@ -12,8 +12,6 @@ export default function FlightList() {
   if (loading) return <p>Loading...</p>;
 
   const handleEdit = (flightId) => {
-    console.log(flightId);
-
     navigator("/edit-flight/" + flightId);
   };
 
@@ -67,7 +65,7 @@ export default function FlightList() {
             <button className="bg-green-500 text-white px-3 py-1 rounded">
               จองเลย!!
             </button>
-            {console.log(flight)}
+
             <button
               className="bg-blue-500 text-white px-3 py-1 rounded"
               onClick={() => handleEdit(flight._id)}
