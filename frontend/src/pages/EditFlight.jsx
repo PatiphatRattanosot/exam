@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { useFlightStore } from "../store/useFlights.store";
 
