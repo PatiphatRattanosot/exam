@@ -1,14 +1,43 @@
 import { useEffect } from "react";
-
+import Swal from "sweetalert2";
 import { useFlightStore } from "../store/useFlights.store";
+import { useNavigate } from "react-router";
 
 export default function FlightList() {
-  const { flights, loading, getflights } = useFlightStore();
-
+  const { flights, loading, getflights, deleteFlight } = useFlightStore();
+  const navigator = useNavigate();
   useEffect(() => {
     getflights();
   }, []);
   if (loading) return <p>Loading...</p>;
+
+  const handleEdit = (flightId) => {
+    console.log(flightId);
+
+    // navigator("/edit-flight/" + flightId);
+  };
+
+  const handleDelete = (flightId) => {
+    Swal.fire({
+      title: "คุณแน่ใจหรือไม���?",
+      text: "คุณต้องการลบเที่ยวบินนี้หรือไม่?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "ลบ",
+      cancelButtonText: "ยกเลิก",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        try {
+          deleteFlight(flightId);
+          Swal.fire("ลบแล้ว!", "เที่ยวบินถูกลบเรียบร้อยแล้ว", "success");
+        } catch (error) {
+          Swal.fire("เกิดข้อผิดพลาด!", "ไม่สามารถลบเที่ยวบินได้", "error");
+        }
+      }
+    });
+  };
 
   return (
     <div className="max-w-5xl mx-auto mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -38,10 +67,17 @@ export default function FlightList() {
             <button className="bg-green-500 text-white px-3 py-1 rounded">
               จองเลย!!
             </button>
-            <button className="bg-blue-500 text-white px-3 py-1 rounded">
+            {console.log(flight)}
+            <button
+              className="bg-blue-500 text-white px-3 py-1 rounded"
+              onClick={() => handleEdit(flight._id)}
+            >
               แก้ไข
             </button>
-            <button className="bg-rose-600 text-white px-3 py-1 rounded">
+            <button
+              className="bg-rose-600 text-white px-3 py-1 rounded"
+              onClick={() => handleDelete(flight._id)}
+            >
               ลบ
             </button>
           </div>
