@@ -10,7 +10,7 @@ exports.generateToken = (userId, res) => {
     maxAge: 24 * 60 * 60 * 1000,
     httpOnly: true, // XSS Attacks
     sameSite: "strict", //CSRF Attacks
-    secure: node_mode !== "development", // true = https , false = http
+    secure: node_mode !== "dev", // true = https , false = http
   });
 
   console.log("Token Generated");
