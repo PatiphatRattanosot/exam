@@ -14,7 +14,7 @@ export default function FlightList() {
   const handleEdit = (flightId) => {
     console.log(flightId);
 
-    // navigator("/edit-flight/" + flightId);
+    navigator("/edit-flight/" + flightId);
   };
 
   const handleDelete = (flightId) => {
